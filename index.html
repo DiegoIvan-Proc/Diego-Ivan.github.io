@@ -1,0 +1,508 @@
+<C-ScrollWheelDown><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Mods Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background: #0d1117;
+            border-bottom: 1px solid #30363d;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: #e0e0e0;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #e0e0e0;
+            transition: 0.3s;
+        }
+
+        /* Sidebar Menu */
+        .sidebar {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: #0d1117;
+            transition: left 0.3s ease;
+            z-index: 1001;
+            padding: 80px 0 20px;
+            border-right: 1px solid #30363d;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-section {
+            margin-bottom: 2rem;
+        }
+
+        .menu-section h3 {
+            color: #58a6ff;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding: 0 20px;
+        }
+
+        .menu-item {
+            display: block;
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 10px 20px;
+            transition: background 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: #21262d;
+            border-left-color: #58a6ff;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-title {
+            color: #58a6ff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .page-description {
+            text-align: center;
+            color: #8b949e;
+            margin-bottom: 2rem;
+        }
+
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .post-card {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-2px);
+            border-color: #58a6ff;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 180px;
+            background: #0d1117;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-title {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-excerpt {
+            color: #8b949e;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        .download-btn {
+            background: #238636;
+            color: white;
+            padding: 5px 12px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #2ea043;
+        }
+
+        /* Search */
+        .search-container {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .search-box {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #e0e0e0;
+            padding: 10px 15px;
+            border-radius: 6px;
+            width: 100%;
+            max-width: 400px;
+            font-size: 1rem;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #58a6ff;
+        }
+
+        /* About Page */
+        .about-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            color: #58a6ff;
+            margin-bottom: 1rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+            color: #8b949e;
+        }
+
+        /* Footer */
+        footer {
+            background: #0d1117;
+            border-top: 1px solid #30363d;
+            padding: 2rem 0;
+            text-align: center;
+            color: #8b949e;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Gaming Mods</a>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <nav class="sidebar" id="sidebar">
+        <div class="menu-section">
+            <h3>Juegos</h3>
+            <a href="#" class="menu-item" data-page="minecraft">Minecraft</a>
+            <a href="#" class="menu-item" data-page="gta">GTA</a>
+            <a href="#" class="menu-item" data-page="skyrim">Skyrim</a>
+            <a href="#" class="menu-item" data-page="fallout">Fallout</a>
+            <a href="#" class="menu-item" data-page="sims">The Sims</a>
+        </div>
+        
+        <div class="menu-section">
+            <h3>Categorías</h3>
+            <a href="#" class="menu-item" data-page="weapons">Armas</a>
+            <a href="#" class="menu-item" data-page="vehicles">Vehículos</a>
+            <a href="#" class="menu-item" data-page="maps">Mapas</a>
+            <a href="#" class="menu-item" data-page="skins">Skins</a>
+            <a href="#" class="menu-item" data-page="texture-packs">Texture Packs</a>
+        </div>
+        
+        <div class="menu-section">
+            <h3>Otros</h3>
+            <a href="#" class="menu-item" data-page="home">Inicio</a>
+            <a href="#" class="menu-item" data-page="about">Sobre nosotros</a>
+            <a href="#" class="menu-item" data-page="contact">Contacto</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- Página Principal -->
+            <div class="page active" id="page-home">
+                <h1 class="page-title">Últimos Mods</h1>
+                <p class="page-description">Los mods más recientes para tus juegos favoritos</p>
+                
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Buscar mods...">
+                </div>
+
+                <div class="posts-grid">
+                    <div class="post-card">
+                        <div class="post-image">Imagen del mod</div>
+                        <div class="post-content">
+                            <h3 class="post-title">Super Espada Diamante</h3>
+                            <p class="post-excerpt">Una espada mejorada con efectos especiales y mayor daño. Compatible con Minecraft 1.20+</p>
+                            <div class="post-meta">
+                                <span>Minecraft • 2 días</span>
+                                <a href="#" class="download-btn">Descargar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-image">Imagen del mod</div>
+                        <div class="post-content">
+                            <h3 class="post-title">Pack de Armas Modernas</h3>
+                            <p class="post-excerpt">Colección de armas modernas para GTA San Andreas. Incluye rifles, pistolas y granadas.</p>
+                            <div class="post-meta">
+                                <span>GTA • 5 días</span>
+                                <a href="#" class="download-btn">Descargar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-image">Imagen del mod</div>
+                        <div class="post-content">
+                            <h3 class="post-title">Texturas Realistas</h3>
+                            <p class="post-excerpt">Pack de texturas 4K para Skyrim que mejora la calidad visual del juego significativamente.</p>
+                            <div class="post-meta">
+                                <span>Skyrim • 1 semana</span>
+                                <a href="#" class="download-btn">Descargar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-image">Imagen del mod</div>
+                        <div class="post-content">
+                            <h3 class="post-title">Mapa Personalizado</h3>
+                            <p class="post-excerpt">Nuevo mapa con ciudades, dungeons y criaturas únicas. Más de 20 horas de contenido.</p>
+                            <div class="post-meta">
+                                <span>Minecraft • 3 días</span>
+                                <a href="#" class="download-btn">Descargar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Página Minecraft -->
+            <div class="page" id="page-minecraft">
+                <h1 class="page-title">Mods de Minecraft</h1>
+                <p class="page-description">Los mejores mods para Minecraft</p>
+                
+                <div class="posts-grid">
+                    <div class="post-card">
+                        <div class="post-image">Imagen del mod</div>
+                        <div class="post-content">
+                            <h3 class="post-title">Mod de Dragones</h3>
+                            <p class="post-excerpt">Añade dragones domesticables al juego con diferentes tipos y habilidades especiales.</p>
+                            <div class="post-meta">
+                                <span>Minecraft • 1 día</span>
+                                <a href="#" class="download-btn">Descargar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-image">Imagen del mod</div>
+                        <div class="post-content">
+                            <h3 class="post-title">Biomas Extremos</h3>
+                            <p class="post-excerpt">Nuevos biomas con criaturas y recursos únicos. Incluye volcanes, glaciares y más.</p>
+                            <div class="post-meta">
+                                <span>Minecraft • 4 días</span>
+                                <a href="#" class="download-btn">Descargar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Página Sobre Nosotros -->
+            <div class="page" id="page-about">
+                <div class="about-content">
+                    <h1 class="page-title">Sobre Nosotros</h1>
+                    <h2>Bienvenido a Gaming Mods</h2>
+                    <p>Somos una comunidad dedicada a compartir los mejores mods para videojuegos. Nuestro objetivo es ayudar a los jugadores a mejorar su experiencia de juego con contenido de calidad.</p>
+                    <p>Todos nuestros mods son probados y verificados antes de ser publicados. Trabajamos con creadores de la comunidad para traerte contenido fresco y emocionante.</p>
+                    <p>Si tienes algún mod que te gustaría compartir, no dudes en contactarnos.</p>
+                </div>
+            </div>
+
+            <!-- Más páginas se pueden agregar aquí -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Gaming Mods Blog. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const menuItems = document.querySelectorAll('.menu-item');
+        const pages = document.querySelectorAll('.page');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        });
+
+        // Page navigation
+        menuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPage = item.getAttribute('data-page');
+                
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show target page
+                const targetPageElement = document.getElementById(`page-${targetPage}`);
+                if (targetPageElement) {
+                    targetPageElement.classList.add('active');
+                }
+                
+                // Close sidebar
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+        });
+
+        // Simple search functionality
+        const searchBox = document.querySelector('.search-box');
+        const postCards = document.querySelectorAll('.post-card');
+
+        searchBox.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            postCards.forEach(card => {
+                const title = card.querySelector('.post-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
