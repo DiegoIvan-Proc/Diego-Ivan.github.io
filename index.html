@@ -3,610 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ModHub - Minecraft Mods</title>
+    <title>Altverse - Plantilla HTML</title>
+    <meta name="description" content="Altverse - Plantilla HTML para diseño web innovador">
+    <meta property="og:title" content="Altverse - Plantilla HTML">
+    <meta property="og:description" content="植illa HTML para diseño web innovador">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Altverse - Plantilla HTML">
+    <meta name="twitter:description" content="Plantilla HTML para diseño web innovador">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Anton&family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --colors--bg-color: #f2f2f2;
+            --fonts--headings: 'Anton', sans-serif;
+            --fonts--paragraph: 'IBM Plex Sans', sans-serif;
+            --colors--paragraph-color: #000c;
+            --colors--accent-color: #1e4b64;
+            --colors--element-color-02: #b3cdeb;
+            --colors--line-color: #000;
+            --colors--element-color: #c3dbf7;
+            --colors--font-color: #000;
+        }
+
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            font-family: sans-serif;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-            line-height: 1.5;
+            background-color: var(--colors--bg-color);
+            font-family: var(--fonts--headings);
+            color: #333;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            margin: 0;
             min-height: 100vh;
         }
 
-        /* Header minimalista */
-        .header {
-            background-color: #212121;
-            border-bottom: 1px solid #333;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* Estilos de la barra de navegación */
+        .navbar {
+            background-color: #fff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .nav-container {
+        .navbar-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 60px;
+            padding: 0 20px;
         }
 
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #00d4aa;
+        .nav-logo {
+            font-family: var(--fonts--headings);
+            font-size: 24px;
+            color: var(--colors--accent-color);
             text-decoration: none;
         }
 
-        .nav-menu {
+        .nav-menu-wrapper {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link-big {
+            font-family: var(--fonts--paragraph);
+            color: var(--colors--font-color);
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-link-big:hover {
+            color: var(--colors--accent-color);
+        }
+
+        .menu-button {
             display: none;
-            gap: 2rem;
-        }
-
-        .nav-menu a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        .nav-menu a:hover {
-            color: #00d4aa;
-        }
-
-        .menu-toggle {
-            display: block;
-            background: none;
-            border: none;
-            color: #e0e0e0;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu {
-            display: none;
-            background-color: #212121;
-            border-top: 1px solid #333;
-            padding: 1rem;
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        .mobile-menu a {
-            display: block;
-            color: #e0e0e0;
-            text-decoration: none;
-            padding: 0.7rem 0;
-            font-size: 0.9rem;
-            border-bottom: 1px solid #333;
-        }
-
-        .mobile-menu a:hover {
-            color: #00d4aa;
-        }
-
-        /* Contenido principal */
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.5rem 1rem;
-        }
-
-        /* Sección de búsqueda simple */
-        .search-section {
-            margin-bottom: 2rem;
-        }
-
-        .search-bar {
-            width: 100%;
-            max-width: 600px;
-            padding: 0.8rem 1rem;
-            border: 1px solid #333;
-            border-radius: 8px;
-            background-color: #2a2a2a;
-            color: #e0e0e0;
-            font-size: 0.9rem;
-        }
-
-        .search-bar::placeholder {
-            color: #888;
-        }
-
-        .search-bar:focus {
-            outline: none;
-            border-color: #00d4aa;
-        }
-
-        /* Filtros compactos */
-        .filters {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            overflow-x: auto;
-            padding-bottom: 0.5rem;
-        }
-
-        .filter-btn {
-            background-color: #2a2a2a;
-            border: 1px solid #333;
-            color: #e0e0e0;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-            font-size: 0.85rem;
-        }
-
-        .filter-btn:hover {
-            background-color: #333;
-        }
-
-        .filter-btn.active {
-            background-color: #00d4aa;
-            color: #1a1a1a;
-            border-color: #00d4aa;
-        }
-
-        /* Grid de mods estilo Modrinth */
-        .mods-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .mod-card {
-            background-color: #2a2a2a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 1rem;
-            transition: all 0.2s;
+            font-family: var(--fonts--paragraph);
             cursor: pointer;
         }
 
-        .mod-card:hover {
-            border-color: #00d4aa;
-            background-color: #2d2d2d;
-        }
-
-        .mod-header {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .mod-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #00d4aa, #00a085);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .mod-info {
-            flex: 1;
-        }
-
-        .mod-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #e0e0e0;
-            margin-bottom: 0.2rem;
-        }
-
-        .mod-author {
-            font-size: 0.8rem;
-            color: #888;
-        }
-
-        .mod-description {
-            font-size: 0.85rem;
-            color: #b0b0b0;
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .mod-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: #888;
-        }
-
-        .mod-downloads {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .mod-version {
-            background-color: #333;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-        }
-
-        /* Categorías populares */
-        .categories-section {
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #e0e0e0;
-        }
-
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 0.8rem;
-        }
-
-        .category-item {
-            background-color: #2a2a2a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .category-item:hover {
-            border-color: #00d4aa;
-            background-color: #2d2d2d;
-        }
-
-        .category-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .category-name {
-            font-size: 0.85rem;
-            color: #e0e0e0;
-        }
-
-        /* Footer simple */
-        .footer {
-            background-color: #212121;
-            border-top: 1px solid #333;
-            padding: 2rem 1rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #888;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: #00d4aa;
-        }
-
-        .footer-text {
-            color: #666;
-            font-size: 0.8rem;
-        }
-
-        /* Responsive */
-        @media (min-width: 768px) {
-            .menu-toggle {
+        @media (max-width: 768px) {
+            .nav-menu-wrapper {
                 display: none;
             }
-
-            .nav-menu {
-                display: flex;
-            }
-
-            .mobile-menu {
-                display: none !important;
-            }
-
-            .mods-grid {
-                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            .menu-button {
+                display: block;
             }
         }
 
-        @media (max-width: 480px) {
-            .nav-container {
-                padding: 0 0.8rem;
-            }
-
-            .main-content {
-                padding: 1rem 0.8rem;
-            }
-
-            .mods-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .categories-grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            }
-
-            .footer-links {
-                gap: 1rem;
-            }
+        /* Estilos de la sección hero */
+        .hero-section {
+            background-color: var(--colors--bg-color);
+            padding: 50px 20px;
         }
 
-        /* Scrollbar personalizada */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
+        .hero-images-wrapper {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
+        .hero-image-holder {
+            position: relative;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #444;
+        .hero-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .hero-text-tag {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: var(--colors--element-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .hero-text {
+            font-family: var(--fonts--paragraph);
+            color: var(--colors--font-color);
+        }
+
+        .hero-section-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .title-caps {
+            font-family: var(--fonts--headings);
+            font-size: 2.5em;
+            color: var(--colors--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .paragraph-holder-hero p {
+            font-family: var(--fonts--paragraph);
+            color: var(--colors--paragraph-color);
+            line-height: 1.5;
+        }
+
+        .button.with-arrow {
+            background-color: var(--colors--accent-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: var(--fonts--paragraph);
+        }
+
+        .button.with-arrow:hover {
+            background-color: var(--colors--element-color-02);
+        }
+
+        /* Estilos de la sección de colaboración */
+        .section.accent-color {
+            background-color: var(--colors--accent-color);
+            color: #fff;
+            padding: 50px 20px;
+        }
+
+        .black-line-text-holder {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .black-line-text-container {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .black-line-text {
+            font-family: var(--fonts--headings);
+            font-size: 1.5em;
+        }
+
+        .grey-text {
+            font-family: var(--fonts--paragraph);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Estilos de la sección de servicios */
+        .section {
+            padding: 50px 20px;
+        }
+
+        .center-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .grid-3x {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: var(--colors--element-color);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--colors--line-color);
+        }
+
+        .card-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-family: var(--fonts--headings);
+            font-size: 1.5em;
+            color: var(--colors--accent-color);
+        }
+
+        .card p {
+            font-family: var(--fonts--paragraph);
+            color: var(--colors--paragraph-color);
+        }
+
+        /* Estilos del pie de página */
+        .footer {
+            background-color: #fff;
+            padding: 50px 20px;
+        }
+
+        .footer-holder {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-gird {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .footer-title {
+            font-family: var(--fonts--headings);
+            font-size: 1.5em;
+            color: var(--colors--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .footer-link {
+            font-family: var(--fonts--paragraph);
+            color: var(--colors--font-color);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-link:hover {
+            color: var(--colors--accent-color);
+        }
+
+        .footer-credits {
+            text-align: center;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <a href="#" class="logo">ModHub</a>
-            <div class="nav-menu">
-                <a href="#mods">Mods</a>
-                <a href="#resource-packs">Resource Packs</a>
-                <a href="#data-packs">Data Packs</a>
-                <a href="#shaders">Shaders</a>
-            </div>
-            <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-        </nav>
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="#mods">Mods</a>
-            <a href="#resource-packs">Resource Packs</a>
-            <a href="#data-packs">Data Packs</a>
-            <a href="#shaders">Shaders</a>
-            <a href="#about">Acerca de</a>
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="nav-logo">Altverse</a>
+            <nav class="nav-menu-wrapper">
+                <a href="/about" class="nav-link-big">Acerca</a>
+                <a href="/work" class="nav-link-big">Trabajos</a>
+                <a href="/contact" class="nav-link-big">Contacto</a>
+            </nav>
+            <div class="menu-button">Menú</div>
         </div>
-    </header>
+    </div>
 
-    <main class="main-content">
-        <!-- Búsqueda -->
-        <section class="search-section">
-            <input type="text" class="search-bar" placeholder="Buscar mods, resource packs, shaders...">
-        </section>
-
-        <!-- Filtros -->
-        <section class="filters">
-            <button class="filter-btn active">Todos</button>
-            <button class="filter-btn">Fabric</button>
-            <button class="filter-btn">Forge</button>
-            <button class="filter-btn">NeoForge</button>
-            <button class="filter-btn">Quilt</button>
-            <button class="filter-btn">1.20.1</button>
-            <button class="filter-btn">1.19.4</button>
-        </section>
-
-        <!-- Grid de mods -->
-        <section class="mods-grid">
-            <div class="mod-card">
-                <div class="mod-header">
-                    <div class="mod-icon">🧪</div>
-                    <div class="mod-info">
-                        <h3 class="mod-title">Sodium</h3>
-                        <span class="mod-author">por jellysquid3</span>
+    <!-- Sección Hero -->
+    <div class="section hero-section">
+        <div class="hero-container">
+            <div class="hero-images-wrapper">
+                <div class="hero-image-holder _01">
+                    <img src="https://via.placeholder.com/500" alt="Imagen Hero 1" class="hero-image">
+                    <div class="hero-text-tag _01">
+                        <div class="hero-text _01">Eso Somos Nosotros</div>
                     </div>
                 </div>
-                <p class="mod-description">Mod de optimización de renderizado más rápido y compatible para Minecraft. ¡Ahora disponible para NeoForge y Fabric!</p>
-                <div class="mod-stats">
-                    <span class="mod-downloads">📥 56.46M</span>
-                    <span class="mod-version">1.20.1</span>
-                </div>
-            </div>
-
-            <div class="mod-card">
-                <div class="mod-header">
-                    <div class="mod-icon">🔧</div>
-                    <div class="mod-info">
-                        <h3 class="mod-title">Fabric API</h3>
-                        <span class="mod-author">por FabricMC</span>
+                <div class="hero-image-holder _02">
+                    <img src="https://via.placeholder.com/500" alt="Imagen Hero 2" class="hero-image">
+                    <div class="hero-text-tag _02">
+                        <div class="hero-text _02">Súper Genial</div>
                     </div>
                 </div>
-                <p class="mod-description">API ligera y modular que proporciona hooks comunes y medidas de intercompatibilidad utilizadas por mods que usan Fabric.</p>
-                <div class="mod-stats">
-                    <span class="mod-downloads">📥 57.38M</span>
-                    <span class="mod-version">1.20.1</span>
-                </div>
-            </div>
-
-            <div class="mod-card">
-                <div class="mod-header">
-                    <div class="mod-icon">🎮</div>
-                    <div class="mod-info">
-                        <h3 class="mod-title">Mod Menu</h3>
-                        <span class="mod-author">por Prospector</span>
+                <div class="hero-image-holder _03">
+                    <img src="https://via.placeholder.com/500" alt="Imagen Hero 3" class="hero-image">
+                    <div class="hero-text-tag">
+                        <div class="hero-text _03">#AmbienteDeTrabajo</div>
                     </div>
                 </div>
-                <p class="mod-description">Añade un menú de mods para ver la lista de mods que tienes instalados.</p>
-                <div class="mod-stats">
-                    <span class="mod-downloads">📥 33.46M</span>
-                    <span class="mod-version">1.20.1</span>
-                </div>
             </div>
-
-            <div class="mod-card">
-                <div class="mod-header">
-                    <div class="mod-icon">🌟</div>
-                    <div class="mod-info">
-                        <h3 class="mod-title">Iris Shaders</h3>
-                        <span class="mod-author">por IrisShaders</span>
-                    </div>
+            <div class="hero-section-content">
+                <h1 class="title-caps">Transformando Ideas en Experiencias Digitales</h1>
+                <div class="paragraph-holder-hero">
+                    <p>Nuestra misión es dar vida a la innovación a través de renders 3D impresionantes y un diseño web fluido.</p>
                 </div>
-                <p class="mod-description">Cargador de shaders moderno para Minecraft destinado a ser compatible con los shader packs de OptiFine existentes.</p>
-                <div class="mod-stats">
-                    <span class="mod-downloads">📥 40.06M</span>
-                    <span class="mod-version">1.20.1</span>
-                </div>
+                <a href="/work" class="button with-arrow">Explora Nuestros Trabajos</a>
             </div>
-
-            <div class="mod-card">
-                <div class="mod-header">
-                    <div class="mod-icon">🚀</div>
-                    <div class="mod-info">
-                        <h3 class="mod-title">Lithium</h3>
-                        <span class="mod-author">por jellysquid3</span>
-                    </div>
-                </div>
-                <p class="mod-description">Mod de optimización de lógica de juego sin compromisos. Bien adaptado para clientes y servidores de todo tipo.</p>
-                <div class="mod-stats">
-                    <span class="mod-downloads">📥 32.68M</span>
-                    <span class="mod-version">1.20.1</span>
-                </div>
-            </div>
-
-            <div class="mod-card">
-                <div class="mod-header">
-                    <div class="mod-icon">🗺️</div>
-                    <div class="mod-info">
-                        <h3 class="mod-title">Xaero's Minimap</h3>
-                        <span class="mod-author">por xaero96</span>
-                    </div>
-                </div>
-                <p class="mod-description">Muestra un mapa del terreno mundial cercano, jugadores, mobs y entidades en la esquina de tu pantalla.</p>
-                <div class="mod-stats">
-                    <span class="mod-downloads">📥 25.44M</span>
-                    <span class="mod-version">1.20.1</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Categorías -->
-        <section class="categories-section">
-            <h2 class="section-title">Categorías</h2>
-            <div class="categories-grid">
-                <div class="category-item">
-                    <span class="category-icon">🏭</span>
-                    <span class="category-name">Tecnología</span>
-                </div>
-                <div class="category-item">
-                    <span class="category-icon">⚔️</span>
-                    <span class="category-name">Aventura</span>
-                </div>
-                <div class="category-item">
-                    <span class="category-icon">🧪</span>
-                    <span class="category-name">Magia</span>
-                </div>
-                <div class="category-item">
-                    <span class="category-icon">🎨</span>
-                    <span class="category-name">Decoración</span>
-                </div>
-                <div class="category-item">
-                    <span class="category-icon">🌍</span>
-                    <span class="category-name">Mundo</span>
-                </div>
-                <div class="category-item">
-                    <span class="category-icon">🛠️</span>
-                    <span class="category-name">Utilidades</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#about">Acerca de</a>
-                <a href="#api">API</a>
-                <a href="#discord">Discord</a>
-                <a href="#github">GitHub</a>
-                <a href="#terms">Términos</a>
-                <a href="#privacy">Privacidad</a>
-            </div>
-            <p class="footer-text">&copy; 2025 ModHub. Hecho con ❤️ para la comunidad de Minecraft.</p>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('active');
-        }
+    <!-- Sección de Colaboración -->
+    <div class="section accent-color">
+        <div class="black-line-text-holder">
+            <div class="black-line-text-container">
+                <div class="black-line-text">La colaboración está en el </div>
+                <div class="grey-text">La colaboración está en el </div>
+            </div>
+            <div class="black-line-text-container">
+                <div class="black-line-text">corazón de nuestro trabajo 🤝✨ </div>
+                <div class="grey-text">corazón de nuestro trabajo 🤝✨ </div>
+            </div>
+            <div class="black-line-text-container">
+                <div class="black-line-text">Prosperamos en entornos </div>
+                <div class="grey-text">Prosperamos en entornos </div>
+            </div>
+            <div class="black-line-text-container">
+                <div class="black-line-text">dinámicos 🌐 donde </div>
+                <div class="grey-text">dinámicos 🌐 donde </div>
+            </div>
+            <div class="black-line-text-container">
+                <div class="black-line-text">las ideas fluyen libremente 💡 y </div>
+                <div class="grey-text">las ideas fluyen libremente 💡 y </div>
+            </div>
+            <div class="black-line-text-container">
+                <div class="black-line-text">las perspectivas diversas</div>
+                <div class="grey-text">las perspectivas diversas</div>
+            </div>
+            <div class="black-line-text-container">
+                <div class="black-line-text">convergen 🚀</div>
+                <div class="grey-text">convergen 🚀</div>
+            </div>
+        </div>
+    </div>
 
-        // Filtros
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            });
-        });
+    <!-- Sección de Servicios -->
+    <div class="section">
+        <div class="container">
+            <div class="center-text">
+                <h2 class="title-caps">Lo Que Hacemos Mejor</h2>
+                <div class="paragraph-holder-section">
+                    <p>Tu sitio web es la puerta de entrada a tu marca, y nos aseguramos de que destaque. Nuestro equipo combina visuales impresionantes, diseño responsivo y experiencias de usuario fluidas para crear sitios web.</p>
+                </div>
+            </div>
+            <div class="grid-3x">
+                <div class="card">
+                    <img src="https://via.placeholder.com/200" alt="Diseño Web" class="card-image">
+                    <div class="card-content">
+                        <div class="card-title">Diseño Web</div>
+                        <p>Construimos sitios web responsivos y de vanguardia que no solo son visualmente atractivos, sino también optimizados para el rendimiento.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/200" alt="Aplicación Móvil" class="card-image">
+                    <div class="card-content">
+                        <div class="card-title">Aplicación Móvil</div>
+                        <p>Desde interfaces de usuario amigables hasta el desarrollo completo de aplicaciones, damos vida a ideas móviles con precisión y estilo.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/200" alt="Desarrollo" class="card-image">
+                    <div class="card-content">
+                        <div class="card-title">Desarrollo</div>
+                        <p>Visuales 3D impresionantes que capturan cada detalle, ideales para presentaciones, diseños arquitectónicos y exhibiciones de productos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // Búsqueda
-        document.querySelector('.search-bar').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const modCards = document.querySelectorAll('.mod-card');
-            
-            modCards.forEach(card => {
-                const title = card.querySelector('.mod-title').textContent.toLowerCase();
-                const description = card.querySelector('.mod-description').textContent.toLowerCase();
-                
-                if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = searchTerm === '' ? 'block' : 'none';
-                }
-            });
-        });
-
-        // Cerrar menú móvil al hacer clic fuera
-        document.addEventListener('click', (e) => {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-            }
-        });
-    </script>
+    <!-- Pie de página -->
+    <div class="section footer">
+        <div class="container no-paddings">
+            <div class="footer-holder">
+                <div class="links-wrapper">
+                    <div class="logo-holder">
+                        <a href="/" class="footer-logo">Altverse<br>Plantilla</a>
+                    </div>
+                    <div class="footer-gird">
+                        <div class="footer-info-holder">
+                            <div class="footer-title">Páginas</div>
+                            <a href="/about" class="footer-link">Acerca</a>
+                            <a href="/work" class="footer-link">Trabajos</a>
+                            <a href="/contact" class="footer-link">Contacto</a>
+                        </div>
+                        <div class="footer-info-holder">
+                            <div class="footer-title">Enlaces</div>
+                            <a href="https://instagram.com" target="_blank" class="footer-link">Instagram</a>
+                            <a href="https://facebook.com" target="_blank" class="footer-link">Facebook</a>
+                            <a href="https://pinterest.com" target="_blank" class="footer-link">Pinterest</a>
+                            <a href="https://unsplash.com" target="_blank" class="footer-link">Unsplash</a>
+                        </div>
+                        <div class="footer-info-holder">
+                            <div class="footer-title">Más Información</div>
+                            <a href="/template/style-guide" class="footer-link">Guía de Estilo</a>
+                            <a href="/template/licensing" class="footer-link">Licencias</a>
+                            <a href="/template/change-log" class="footer-link">Registro de Cambios</a>
+                            <a href="/template/instructions" class="footer-link">Instrucciones</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-credits">
+                    <a href="#" class="footer-link">Desarrollado por Oversight</a>
+                    <a href="#" class="footer-link">Impulsado por Webflow</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
